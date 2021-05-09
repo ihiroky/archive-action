@@ -36,5 +36,5 @@ runs:
       if verbose.lower() == 'true':
         print('Working directory: {}'.format(os.getcwd()))
 
-      os.system('python3 compress.py "{}" "{}" "{}" "{}"'.format(file_path, root_dir, base_dir, verbose))
+      os.system('python3 ${{ github.action_path }}/compress.py "{}" "{}" "{}" "{}"'.format(file_path, root_dir, base_dir, verbose))
     shell: python
