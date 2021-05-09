@@ -25,48 +25,56 @@ jobs:
         with:
           root_dir: root
           file_path: root.zip
+          debug: true
 
       - name: Create tar
         uses: ./
         with:
           root_dir: root
           file_path: root.tar
+          debug: true
 
       - name: Create tar.gz
         uses: ./
         with:
           root_dir: root
           file_path: root.tar.gz
+          debug: true
 
       - name: Create tgz
         uses: ./
         with:
           root_dir: root
           file_path: root.tgz
+          debug: true
 
       - name: Create tar.bz2
         uses: ./
         with:
           root_dir: root
           file_path: root.tar.bz2
+          debug: true
 
       - name: Create tbz2
         uses: ./
         with:
           root_dir: root
           file_path: root.tbz2
+          debug: true
 
       - name: Create tar.xz
         uses: ./
         with:
           root_dir: root
           file_path: root.tar.xz
+          debug: true
 
       - name: Create txz
         uses: ./
         with:
           root_dir: root
           file_path: root.txz
+          debug: true
 
       - name: Check if all archives are created
         run: |
