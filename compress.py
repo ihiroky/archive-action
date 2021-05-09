@@ -3,7 +3,6 @@ import os
 import sys
 
 def main(file_path, root_dir, base_dir, verbose):
-  verbose = '${{ inputs.verbose }}'
   if file_path == '':
     file_path = 'output.zip'
   if root_dir == '':
@@ -69,4 +68,4 @@ def main(file_path, root_dir, base_dir, verbose):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+  main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])

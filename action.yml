@@ -24,12 +24,15 @@ runs:
   using: 'composite'
   steps:
   - run: |
-      import compress
+      import os
 
       file_path = '${{ inputs.file_path }}'
       root_dir = '${{ inputs.root_dir }}'
       base_dir = '${{ inputs.base_dir }}'
       verbose = '${{ inputs.verbose }}'
 
-      compress.main(file_path, root_dir, base_dir, verbose)
+      if verbose:
+        print('Working directory: {}''.format(os.getcwd()))
+
+      os.system('python3 compress.py {} {} {} {}'.format(file_path, root_dir, base_dir, verbose))
     shell: python3 {0}
