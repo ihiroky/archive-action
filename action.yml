@@ -86,7 +86,7 @@ runs:
       log('Generated archive:{}', archive_name)
       if not archive_name.endswith(ext):
         os.rename(archive_name, file_path)
-        log('Rename from:{} to {}', archive_name, file_path)
+        log('Extension mismatch. Rename from {} to {}', archive_name, file_path)
 
       print('{0} is created.'.format(file_path))
 

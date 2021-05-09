@@ -26,6 +26,8 @@ jobs:
           root_dir: root
           file_path: root.zip
           verbose: true
+      - run: test -f root.zip
+        shell: bash
 
       - name: Create tar
         uses: ./
@@ -33,6 +35,8 @@ jobs:
           root_dir: root
           file_path: root.tar
           verbose: true
+      - run: test -f root.tar
+        shell: bash
 
       - name: Create tar.gz
         uses: ./
@@ -40,6 +44,8 @@ jobs:
           root_dir: root
           file_path: root.tar.gz
           verbose: true
+      - run: test -f root.tar.gz
+        shell: bash
 
       - name: Create tgz
         uses: ./
@@ -47,6 +53,8 @@ jobs:
           root_dir: root
           file_path: root.tgz
           verbose: true
+      - run: test -f root.tgz
+        shell: bash
 
       - name: Create tar.bz2
         uses: ./
@@ -54,6 +62,8 @@ jobs:
           root_dir: root
           file_path: root.tar.bz2
           verbose: true
+      - run: test -f root.tar.bz2
+        shell: bash
 
       - name: Create tbz2
         uses: ./
@@ -61,6 +71,8 @@ jobs:
           root_dir: root
           file_path: root.tbz2
           verbose: true
+      - run: test -f root.tbz2
+        shell: bash
 
       - name: Create tar.xz
         uses: ./
@@ -68,6 +80,8 @@ jobs:
           root_dir: root
           file_path: root.tar.xz
           verbose: true
+      - run: test -f root.tar.xz
+        shell: bash
 
       - name: Create txz
         uses: ./
@@ -75,20 +89,5 @@ jobs:
           root_dir: root
           file_path: root.txz
           verbose: true
-
-      - name: Check if all archives are created
-        run: |
-          check() {
-            local file=$1
-            test -f $file && echo "[$file] OK" || echo "[$file] NG"
-          }
-          ls root.*
-          check root.zip
-          check root.tar
-          check root.tar.gz
-          check root.tgz
-          check root.tar.bz2
-          check root.tbz2
-          check root.tar.xz
-          check root.txz
+      - run: test -f root.txz
         shell: bash
