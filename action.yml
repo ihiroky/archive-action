@@ -26,7 +26,7 @@ runs:
   - run: |
       import os
 
-      # Environment variables for 'inputs' are probably not defined in script executed by python shell.
+      # Environment variables for 'inputs' are probably not defined in python shell.
       # So refer them here.
       file_path = '${{ inputs.file_path }}'
       root_dir = '${{ inputs.root_dir }}'
@@ -36,5 +36,5 @@ runs:
       if verbose.lower() == 'true':
         print('Working directory: {}'.format(os.getcwd()))
 
-      os.system('python3 compress.py {} {} {} {}'.format(file_path, root_dir, base_dir, verbose))
+      os.system('python3 compress.py "{}" "{}" "{}" "{}"'.format(file_path, root_dir, base_dir, verbose))
     shell: python
