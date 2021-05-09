@@ -1,6 +1,6 @@
 # compress-action
 
-Creates an archive file for your artifacts on any platform. This action is powered by python's `shutil.make_archive`, and probably lightweight because it works without docker build.
+Github Action to create an archive file for your artifacts on any platform. This action is powered by python's `shutil.make_archive`, and probably lightweight because it works without docker build.
 
 ## Supported format
 
