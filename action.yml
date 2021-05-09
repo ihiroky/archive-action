@@ -47,7 +47,7 @@ runs:
 
       file_path = '${{ inputs.file_path }}'
       root_dir = '${{ inputs.root_dir }}'
-      base_dir = '${{ inputs.base_dir }}''
+      base_dir = '${{ inputs.base_dir }}'
       if root_dir == ''
         print('root_dir must be set.')
         sys.exit(1)
