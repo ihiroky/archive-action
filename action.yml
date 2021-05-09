@@ -9,7 +9,7 @@ inputs:
     description: Root directory.
     required: true
   base_dir:
-    description: Base directory: common prefix of all files and directories in the archive, relative to root_dir.
+    description: Base directory; common prefix of all files and directories in the archive, relative to root_dir.
     required: false
     default: '.'
   file_path:
