@@ -24,49 +24,49 @@ jobs:
         uses: ./
         with:
           root_dir: root
-          output: root.zip
+          file_path: root.zip
 
       - name: Create tar
         uses: ./
         with:
           root_dir: root
-          output: root.tar
+          file_path: root.tar
 
       - name: Create tar.gz
         uses: ./
         with:
           root_dir: root
-          output: root.tar.gz
+          file_path: root.tar.gz
 
       - name: Create tgz
         uses: ./
         with:
           root_dir: root
-          output: root.tgz
+          file_path: root.tgz
 
       - name: Create tar.bz2
         uses: ./
         with:
           root_dir: root
-          output: root.tar.bz2
+          file_path: root.tar.bz2
 
       - name: Create tbz2
         uses: ./
         with:
           root_dir: root
-          output: root.tbz2
+          file_path: root.tbz2
 
       - name: Create tar.xz
         uses: ./
         with:
           root_dir: root
-          output: root.tar.xz
+          file_path: root.tar.xz
 
       - name: Create txz
         uses: ./
         with:
           root_dir: root
-          output: root.txz
+          file_path: root.txz
 
       - name: Check if all archives are created
         run: |
