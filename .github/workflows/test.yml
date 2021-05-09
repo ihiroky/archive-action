@@ -72,8 +72,9 @@ jobs:
         run: |
           check() {
             local file=$1
-            test -f $file && echo "[${file##.}] OK" || echo "[${file##.}] NG"
+            test -f $file && echo "[$file] OK" || echo "[$file] NG"
           }
+          ls root.*
           check root.zip
           check root.tar
           check root.tar.gz
