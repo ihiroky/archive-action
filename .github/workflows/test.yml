@@ -11,6 +11,8 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: Prepare files to archive
         run: |
           mkdir -p root/hoge/fuga/
