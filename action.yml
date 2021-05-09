@@ -90,4 +90,4 @@ runs:
 
       print('{0} is created.'.format(file_path))
 
-    shell: python3
+    shell: python3 {0}
