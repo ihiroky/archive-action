@@ -26,8 +26,12 @@ jobs:
           root_dir: root
           file_path: root.zip
           verbose: true
-      - run: test -f root.zip
-        shell: bash
+      - name: Extract zip
+        uses: ihiroky/extract-action@main
+        with:
+          file_path: root.zip
+          extract_dir: extract/zip
+      - run: test -f extract/zip/hoge/fuga/file -a -f extract/zip/file
 
       - name: Create tar
         uses: ./
@@ -35,8 +39,12 @@ jobs:
           root_dir: root
           file_path: root.tar
           verbose: true
-      - run: test -f root.tar
-        shell: bash
+      - name: Extract tar
+        uses: ihiroky/extract-action@main
+        with:
+          file_path: root.tar
+          extract_dir: extract/tar
+      - run: test -f extract/tar/hoge/fuga/file -a -f extract/tar/file
 
       - name: Create tar.gz
         uses: ./
@@ -44,8 +52,12 @@ jobs:
           root_dir: root
           file_path: root.tar.gz
           verbose: true
-      - run: test -f root.tar.gz
-        shell: bash
+      - name: Extract tar.gz
+        uses: ihiroky/extract-action@main
+        with:
+          file_path: root.tar.gz
+          extract_dir: 'extract/tar.gz'
+      - run: test -f extract/tar.gz/hoge/fuga/file -a -f extract/tar.gz/file
 
       - name: Create tgz
         uses: ./
@@ -53,8 +65,12 @@ jobs:
           root_dir: root
           file_path: root.tgz
           verbose: true
-      - run: test -f root.tgz
-        shell: bash
+      - name: Extract tgz
+        uses: ihiroky/extract-action@main
+        with:
+          file_path: root.tgz
+          extract_dir: 'extract/tgz'
+      - run: test -f extract/tgz/hoge/fuga/file -a -f extract/tgz/file
 
       - name: Create tar.bz2
         uses: ./
@@ -62,8 +78,12 @@ jobs:
           root_dir: root
           file_path: root.tar.bz2
           verbose: true
-      - run: test -f root.tar.bz2
-        shell: bash
+      - name: Extract tar.bz2
+        uses: ihiroky/extract-action@main
+        with:
+          file_path: root.tar.bz2
+          extract_dir: 'extract/tar.bz2'
+      - run: test -f extract/tar.bz2/hoge/fuga/file -a -f extract/tar.bz2/file
 
       - name: Create tbz2
         uses: ./
@@ -71,8 +91,12 @@ jobs:
           root_dir: root
           file_path: root.tbz2
           verbose: true
-      - run: test -f root.tbz2
-        shell: bash
+      - name: Extract tbz2
+        uses: ihiroky/extract-action@main
+        with:
+          file_path: root.tbz2
+          extract_dir: 'extract/tbz2'
+      - run: test -f extract/tbz2/hoge/fuga/file -a -f extract/tbz2/file
 
       - name: Create tar.xz
         uses: ./
@@ -80,8 +104,12 @@ jobs:
           root_dir: root
           file_path: root.tar.xz
           verbose: true
-      - run: test -f root.tar.xz
-        shell: bash
+      - name: Extract tar.xz
+        uses: ihiroky/extract-action@main
+        with:
+          file_path: root.tar.xz
+          extract_dir: 'extract/tar.xz'
+      - run: test -f extract/tar.xz/hoge/fuga/file -a -f extract/tar.xz/file
 
       - name: Create txz
         uses: ./
@@ -89,5 +117,9 @@ jobs:
           root_dir: root
           file_path: root.txz
           verbose: true
-      - run: test -f root.txz
-        shell: bash
+      - name: Extract txz
+        uses: ihiroky/extract-action@main
+        with:
+          file_path: root.txz
+          extract_dir: 'extract/txz'
+      - run: test -f extract/txz/hoge/fuga/file -a -f extract/txz/file
