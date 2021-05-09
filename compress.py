@@ -2,69 +2,71 @@ import shutil
 import os
 import sys
 
-file_path = '${{ inputs.file_path }}'
-root_dir = '${{ inputs.root_dir }}'
-base_dir = '${{ inputs.base_dir }}'
-verbose = '${{ inputs.verbose }}'
-if file_path == '':
-  file_path = 'output.zip'
-if root_dir == '':
-  print('root_dir must be set.')
-  sys.exit(1)
-if base_dir == '':
-  base_dir = '.'
-verbose = verbose.lower() == 'true'
+def main(file_path, root_dir, base_dir, verbose):
+  verbose = '${{ inputs.verbose }}'
+  if file_path == '':
+    file_path = 'output.zip'
+  if root_dir == '':
+    print('root_dir must be set.')
+    sys.exit(1)
+  if base_dir == '':
+    base_dir = '.'
+  verbose = verbose.lower() == 'true'
 
-if verbose:
-  print('Print environment variables:')
-  for k, v in os.environ.items():
-    print(' ', k, v)
-
-def log(fmt, *args):
   if verbose:
-    print(fmt.format(*args))
+    print('Print environment variables:')
+    for k, v in os.environ.items():
+      print(' ', k, v)
 
-log('Inputs => file_path:{}, root_dir:{}, base_dir:{}, verbose:{}', file_path, root_dir, base_dir, verbose)
+  def log(fmt, *args):
+    if verbose:
+      print(fmt.format(*args))
 
-formats = {
-  '.zip': 'zip',
-  '.tar': 'tar',
-  '.tar.gz': 'gztar',
-  '.tgz': 'gztar',
-  '.tar.bz2': 'bztar',
-  '.tbz2': 'bztar',
-  '.tar.xz': 'xztar',
-  '.txz': 'xztar',
-}
-default_extensions = {
-  'zip': 'zip',
-  'tar': 'tar',
-  'gztar': 'tar.gz',
-  'bztar': 'tar.bz2',
-  'xztar': 'tar.xz',
-}
+  log('Inputs => file_path:{}, root_dir:{}, base_dir:{}, verbose:{}', file_path, root_dir, base_dir, verbose)
 
-def split(s, n):
-  return s[:-n], s[-(n - 1):]
+  formats = {
+    '.zip': 'zip',
+    '.tar': 'tar',
+    '.tar.gz': 'gztar',
+    '.tgz': 'gztar',
+    '.tar.bz2': 'bztar',
+    '.tbz2': 'bztar',
+    '.tar.xz': 'xztar',
+    '.txz': 'xztar',
+  }
+  default_extensions = {
+    'zip': 'zip',
+    'tar': 'tar',
+    'gztar': 'tar.gz',
+    'bztar': 'tar.bz2',
+    'xztar': 'tar.xz',
+  }
 
-base, ext, fmt = '', '', ''
-lc_file_path = file_path.lower()
-for k, v in formats.items():
-  if lc_file_path.endswith(k):
-    base, ext = split(file_path, len(k))
-    fmt = v
-    break
+  def split(s, n):
+    return s[:-n], s[-(n - 1):]
 
-if fmt == '':
-  print('Unexpected extension: {0}'.format(file_path))
-  sys.exit(2)
+  base, ext, fmt = '', '', ''
+  lc_file_path = file_path.lower()
+  for k, v in formats.items():
+    if lc_file_path.endswith(k):
+      base, ext = split(file_path, len(k))
+      fmt = v
+      break
 
-log('filepath => base:{}, ext:{}, fmt:{}', base, ext, fmt)
+  if fmt == '':
+    print('Unexpected extension: {0}'.format(file_path))
+    sys.exit(2)
 
-archive_name = shutil.make_archive(base, fmt, root_dir, base_dir)
-log('Generated archive:{}', archive_name)
-if not archive_name.endswith(ext):
-  os.rename(archive_name, file_path)
-  log('Rename from:{} to {}', archive_name, file_path)
+  log('filepath => base:{}, ext:{}, fmt:{}', base, ext, fmt)
 
-print('{0} is created.'.format(file_path))
+  archive_name = shutil.make_archive(base, fmt, root_dir, base_dir)
+  log('Generated archive:{}', archive_name)
+  if not archive_name.endswith(ext):
+    os.rename(archive_name, file_path)
+    log('Rename from:{} to {}', archive_name, file_path)
+
+  print('{0} is created.'.format(file_path))
+
+
+if __name__ == '__main__':
+    main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
