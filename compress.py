@@ -5,7 +5,7 @@ import sys
 file_path = '${{ inputs.file_path }}'
 root_dir = '${{ inputs.root_dir }}'
 base_dir = '${{ inputs.base_dir }}'
-debug = '${{ inputs.debug }}'
+verbose = '${{ inputs.verbose }}'
 if file_path == '':
   file_path = 'output.zip'
 if root_dir == '':
@@ -13,13 +13,13 @@ if root_dir == '':
   sys.exit(1)
 if base_dir == '':
   base_dir = '.'
-debug = True if debug.lower() == 'true' else False
+verbose = True if verbose.lower() == 'true' else False
 
 def log(fmt, *args):
-  if debug:
+  if verbose:
     print(fmt.format(*args))
 
-log('file_path:{}, root_dir:{}, base_dir:{}, debug:{}', file_path, root_dir, base_dir, debug)
+log('Inputs => file_path:{}, root_dir:{}, base_dir:{}, verbose:{}', file_path, root_dir, base_dir, verbose)
 
 formats = {
   '.zip': 'zip',
@@ -54,7 +54,7 @@ if fmt == '':
   print('Unexpected extension: {0}'.format(file_path))
   sys.exit(2)
 
-log('base:{}, ext:{}, fmt:{}', base, ext, fmt)
+log('filepath => base:{}, ext:{}, fmt:{}', base, ext, fmt)
 
 archive_name = shutil.make_archive(base, fmt, root_dir, base_dir)
 log('Generated archive:{}', archive_name)
