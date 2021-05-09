@@ -16,6 +16,10 @@ inputs:
     description: 'Output file path. Supported extensions: zip, tar, tar.gz(tgz), tar.bz2(tbz2), tar.xz(txz)'
     required: false
     default: output.zip
+  verbose:
+    description: 'Shows details about the result of running this action.'
+    required: false
+    default: false
 runs:
   using: 'composite'
   steps:
@@ -23,6 +27,14 @@ runs:
       import shutil
       import os
       import sys
+
+      file_path = '${{ inputs.file_path }}'
+      root_dir = '${{ inputs.root_dir }}'
+      base_dir = '${{ inputs.base_dir }}'
+      debug = ${{ inputs.debug }}
+      if root_dir == '':
+        print('root_dir must be set.')
+        sys.exit(1)
 
       formats = {
         '.zip': 'zip',
@@ -45,12 +57,11 @@ runs:
       def split(s, n):
         return s[:-n], s[-(n - 1):]
 
-      file_path = '${{ inputs.file_path }}'
-      root_dir = '${{ inputs.root_dir }}'
-      base_dir = '${{ inputs.base_dir }}'
-      if root_dir == '':
-        print('root_dir must be set.')
-        sys.exit(1)
+      def log(fmt, *args):
+        if debug:
+          print(fmt.format(*args))
+
+      log('file_path:{}, root_dir:{}, base_dir:{}, debug:{}', file_path, root_dir, base_dir, debug)
 
       base, ext, fmt = '', '', ''
       lc_file_path = file_path.lower()
@@ -64,8 +75,12 @@ runs:
         print('Unexpected extension: {0}'.format(file_path))
         sys.exit(2)
 
+      log('base:{}, ext:{}, fmt:{}', base, ext, fmt)
+
       archive_name = shutil.make_archive(base, fmt, root_dir, base_dir)
+      log('Generated archive:{}', archive_name)
       if not archive_name.endswith(ext):
         os.rename(archive_name, file_path)
+        log('Rename from:{} to {}', archive_name, file_path)
       print('{0} is created.'.format(file_path))
     shell: python
