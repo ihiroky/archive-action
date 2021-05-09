@@ -3,7 +3,7 @@ author: ihiroky
 branding:
   icon: archive
   color: blue
-description: Compress files and directories as workflow action.
+description: Github Action to create an archive file for your artifacts on any platform. This action is powered by python's `shutil.make_archive`, and probably lightweight because it works without docker build.
 inputs:
   root_dir:
     description: Root directory.
