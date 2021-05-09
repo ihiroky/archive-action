@@ -13,7 +13,12 @@ if root_dir == '':
   sys.exit(1)
 if base_dir == '':
   base_dir = '.'
-verbose = True if verbose.lower() == 'true' else False
+verbose = verbose.lower() == 'true'
+
+if verbose:
+  print('Print environment variables:')
+  for k, v in os.environ.items():
+    print(' ', k, v)
 
 def log(fmt, *args):
   if verbose:
