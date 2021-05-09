@@ -37,5 +37,5 @@ runs:
         print('Working directory: {}'.format(os.getcwd()))
 
       script = os.path.join(r'${{ github.action_path }}', 'compress.py')
-      os.system(r'python3 "{}"" "{}" "{}" "{}" "{}"'.format(script, file_path, root_dir, base_dir, verbose))
+      os.system(r'python3 "{}" "{}" "{}" "{}" "{}"'.format(script, file_path, root_dir, base_dir, verbose))
     shell: python
