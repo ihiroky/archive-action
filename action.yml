@@ -64,9 +64,8 @@ runs:
         print('Unexpected extension: {0}'.format(file_path))
         sys.exit(2)
 
-      shutil.make_archive(base, fmt, root_dir, base_dir)
-      actual='{0}.{1}'.format(base, default_extensions[fmt])
-      if not actual.endswith(ext):
-        os.rename(actual, file_path)
+      archive_name = shutil.make_archive(base, fmt, root_dir, base_dir)
+      if not archive_name.endswith():
+        os.rename(archive_name, file_path)
       print('{0} is created.'.format(file_path))
     shell: python
