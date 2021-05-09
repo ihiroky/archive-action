@@ -32,7 +32,7 @@ runs:
       verbose = '${{ inputs.verbose }}'
 
       if verbose:
-        print('Working directory: {}''.format(os.getcwd()))
+        print('Working directory: {}'.format(os.getcwd()))
 
       os.system('python3 compress.py {} {} {} {}'.format(file_path, root_dir, base_dir, verbose))
     shell: python3 {0}
