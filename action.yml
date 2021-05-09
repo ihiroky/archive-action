@@ -39,7 +39,7 @@ runs:
         'tar': 'tar',
         'gztar': 'tar.gz',
         'bztar': 'tar.bz2',
-        'txtar': 'tar.xz',
+        'xztar': 'tar.xz',
       }
 
       def split(s, n):
