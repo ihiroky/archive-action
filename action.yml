@@ -31,7 +31,7 @@ runs:
       file_path = '${{ inputs.file_path }}'
       root_dir = '${{ inputs.root_dir }}'
       base_dir = '${{ inputs.base_dir }}'
-      debug = '${{ inputs.debug }}''
+      debug = '${{ inputs.debug }}'
       if file_path == '':
         file_path = 'output.zip'
       if root_dir == '':
@@ -87,5 +87,6 @@ runs:
       if not archive_name.endswith(ext):
         os.rename(archive_name, file_path)
         log('Rename from:{} to {}', archive_name, file_path)
+
       print('{0} is created.'.format(file_path))
     shell: python

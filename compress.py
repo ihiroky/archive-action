@@ -1,8 +1,25 @@
-#!/usr/bin/python
-
 import shutil
 import os
 import sys
+
+file_path = '${{ inputs.file_path }}'
+root_dir = '${{ inputs.root_dir }}'
+base_dir = '${{ inputs.base_dir }}'
+debug = '${{ inputs.debug }}'
+if file_path == '':
+  file_path = 'output.zip'
+if root_dir == '':
+  print('root_dir must be set.')
+  sys.exit(1)
+if base_dir == '':
+  base_dir = '.'
+debug = True if debug.lower() == 'true' else False
+
+def log(fmt, *args):
+  if debug:
+    print(fmt.format(*args))
+
+log('file_path:{}, root_dir:{}, base_dir:{}, debug:{}', file_path, root_dir, base_dir, debug)
 
 formats = {
   '.zip': 'zip',
@@ -19,18 +36,11 @@ default_extensions = {
   'tar': 'tar',
   'gztar': 'tar.gz',
   'bztar': 'tar.bz2',
-  'txtar': 'tar.xz',
+  'xztar': 'tar.xz',
 }
 
 def split(s, n):
   return s[:-n], s[-(n - 1):]
-
-file_path = os.environ.get('INPUT_FILE_PATH', 'output.zip')
-root_dir = os.environ.get('INPUT_ROOT_DIR')
-base_dir = os.environ.get('INPUT_BASE_DIR', '.')
-if root_dir is None:
-  print('root_dir must be set.')
-  sys.exit(1)
 
 base, ext, fmt = '', '', ''
 lc_file_path = file_path.lower()
@@ -44,8 +54,12 @@ if fmt == '':
   print('Unexpected extension: {0}'.format(file_path))
   sys.exit(2)
 
-shutil.make_archive(base, fmt, root_dir, base_dir)
-actual='{0}.{1}'.format(base, default_extensions[fmt])
-if not actual.endswith(ext):
-  os.rename(actual, file_path)
+log('base:{}, ext:{}, fmt:{}', base, ext, fmt)
+
+archive_name = shutil.make_archive(base, fmt, root_dir, base_dir)
+log('Generated archive:{}', archive_name)
+if not archive_name.endswith(ext):
+  os.rename(archive_name, file_path)
+  log('Rename from:{} to {}', archive_name, file_path)
+
 print('{0} is created.'.format(file_path))
