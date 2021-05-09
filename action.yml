@@ -1,0 +1,23 @@
+name: Compress Action
+author: ihiroky
+branding:
+  icon: archive
+  color: blue
+description: Compress files and directories as workflow action.
+inputs:
+  root_dir:
+    description: Root directory.
+    required: true
+  base_dir:
+    description: Base directory: common prefix of all files and directories in the archive, relative to root_dir.
+    required: false
+    default: '.'
+  file_path:
+    description: 'Output file path. Supported extensions: zip, tar, tar.gz(tgz), tar.bz2(tbz2), tar.xz(txz)'
+    required: false
+    default: output.zip
+runs:
+  using: 'composite'
+  steps:
+  - run: ${{ github.action_path }}/compress.py
+    shell: python
