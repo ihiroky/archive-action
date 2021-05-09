@@ -14,7 +14,7 @@ Github Action to create an archive file for your artifacts on any platform. This
 
 ```yaml
       - name: Create zip
-        uses: ihiroky/compress-action@v1
+        uses: ihiroky/archive-action@v1
         with:
           root_dir: path_to_arhive_root_directory
           file_path: path_to_archive.zip
