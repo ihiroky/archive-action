@@ -65,7 +65,7 @@ runs:
         sys.exit(2)
 
       archive_name = shutil.make_archive(base, fmt, root_dir, base_dir)
-      if not archive_name.endswith():
+      if not archive_name.endswith(ext):
         os.rename(archive_name, file_path)
       print('{0} is created.'.format(file_path))
     shell: python
